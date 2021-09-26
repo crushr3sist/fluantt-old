@@ -1,6 +1,8 @@
 from .__init__ import db
 
-class Users(db.Model):
+from flask_login import UserMixin
+
+class Users(UserMixin,db.Model):
     __tablename__ = 'Users'
     id = db.Column(db.Integer(), primary_key=True)
     email = db.Column(db.String(), nullable=False)
@@ -14,12 +16,16 @@ class Users(db.Model):
     is_anonymous = False
     get_id = id
 
-    def __init__(self,email,username,password,name,nickname):
+    def __init__(self,email,username,password,name,nickname): 
         self.email = email
         self.username = username
         self.password = password
         self.name = name
         self.nickname = nickname
+    def __repr__(self):
+        return f'''
+        User(email = {self.email}, username = {self.username}, password = {self.password}, name = {self.name}, nickname = {self.nickname})>
+        '''
 
 class BarkMain(db.Model):
     __tablename__ = 'BarkMain'
