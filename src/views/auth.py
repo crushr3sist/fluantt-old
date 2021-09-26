@@ -38,11 +38,14 @@ def login():
             print('got past: validation_on_submit function')
             user = Users.query.filter_by(username=form.username.data).first()
             print('got past: user variable declaration')
-            if not user or not check_password_hash(user.password, form.password.data):
+            if not user:
                 return redirect('/login')
-            login_user(user)
-            print('got past: login user function')
-            return redirect(f'/{form.username.data}/home')
+            else:
+                user.is_active = True
+                print(user)
+                print(login_user(user))
+                print('got past: login user function')
+                return redirect(f'/{user.username}/home')
     else:
         return render_template('login.html', form=LoginForm())
 
@@ -56,7 +59,7 @@ def userQuery():
 @login_required
 def logout():
     if Users.is_authenticated:
-        logout_user(Users)
+        logout_user()
         return redirect('/login')
     return render_template('login.html')
 

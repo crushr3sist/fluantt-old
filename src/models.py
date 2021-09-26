@@ -14,7 +14,11 @@ class Users(UserMixin,db.Model):
     is_authenticated = False
     is_active = False
     is_anonymous = False
-    get_id = id
+
+    def get_id(self):
+        return self.id
+    def is_authenticated(self):
+        return self.authenticated
 
     def __init__(self,email,username,password,name,nickname): 
         self.email = email
@@ -22,10 +26,8 @@ class Users(UserMixin,db.Model):
         self.password = password
         self.name = name
         self.nickname = nickname
-    def __repr__(self):
-        return f'''
-        User(email = {self.email}, username = {self.username}, password = {self.password}, name = {self.name}, nickname = {self.nickname})>
-        '''
+    
+
 
 class BarkMain(db.Model):
     __tablename__ = 'BarkMain'
