@@ -1,3 +1,39 @@
+# 🟨 What's Next __Python__:
+  - [ ] produce Feed Route
+  - [ ] produce ProfileRoute
+  - [ ] produce postCreation Route
+  - [ ] produce postEdit route
+  - [ ] produce postDelete route
+  - [ ] produce likes and dislike functionality of posts
+  - [ ] produce comment functionality of posts
+
+# 🟦 What's Next __SQL__:
+  - [ ]  produce userExtra table
+  - [ ]  produce Feed Table
+  - [ ]  create UsersPosts table
+
+# 🟧 What's Next __HTML__:
+  - [ ] produce ProfilePage HTML
+  - [x] produce landingPage HTML
+  - [ ] produce feedPage HTML
+
+# 🟩 What's Next __Tailwind__:
+  - [x] create landingPage css
+  - [x] create landingPage res
+  - [ ] create loginPage css
+  - [ ] create loginPage res
+  - [ ] create regPage css
+  - [ ] create regPage res
+  - [ ] create ProfilePage css
+  - [ ] create ProfilePage res
+  - [ ] create feedPage css
+  - [ ] create feedPage res
+
+# ⭕ What's Next __Misc__:
+  - [ ] setup email server
+  - [ ] impliment OAuth with Google and Facebook authentication
+  - [ ] impliment 2FA using tokenisation
+
 # What is this?
 
 this is called Barkrr. The social media designed for dogs to communicate without pesky humans getting in thier way. ofc this if for those specially smart dogs who can type using a keyboard
