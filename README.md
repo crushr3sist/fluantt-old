@@ -1,3 +1,5 @@
+![Screenshot 2021-09-28 043645](https://user-images.githubusercontent.com/36351054/134966132-12a8d4dd-ab07-4a44-8a15-78a45afec507.png)
+
 # 🟨 What's Next __Python__:
   - [ ] produce Feed Route
   - [ ] produce ProfileRoute
@@ -20,16 +22,17 @@
 # 🟩 What's Next __Tailwind__:
   - [x] create landingPage css
   - [x] create landingPage res
-  - [ ] create loginPage css
-  - [ ] create loginPage res
-  - [ ] create regPage css
-  - [ ] create regPage res
+  - [x] create loginPage css
+  - [x] create loginPage res
+  - [x] create regPage css
+  - [x] create regPage res
   - [ ] create ProfilePage css
   - [ ] create ProfilePage res
   - [ ] create feedPage css
   - [ ] create feedPage res
 
 # ⭕ What's Next __Misc__:
+
   - [ ] setup email server
   - [ ] impliment OAuth with Google and Facebook authentication
   - [ ] impliment 2FA using tokenisation
