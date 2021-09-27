@@ -1,23 +1,33 @@
-# 🟧 What's Next __HTML__:
-  - [ ] produce profile page
-  - [ ] create decent html
-  - [ ] choose tailwind
-  - [ ] desgin login page
-  - [ ] design register page
-  - [ ] design homepage
-  - [ ] produce global page html
-
-
-
 # 🟨 What's Next __Python__:
-  - [ ] produce global page data assortment
-  - [ ] produce post creation
+  - [ ] produce Feed Route
+  - [ ] produce ProfileRoute
+  - [ ] produce postCreation Route
+  - [ ] produce postEdit route
+  - [ ] produce postDelete route
   - [ ] produce likes and dislike functionality of posts
+  - [ ] produce comment functionality of posts
 
 # 🟦 What's Next __SQL__:
   - [ ]  produce userExtra table
   - [ ]  produce Feed Table
   - [ ]  create UsersPosts table
+
+# 🟧 What's Next __HTML__:
+  - [ ] produce ProfilePage HTML
+  - [ ] produce landingPage HTML
+  - [ ] produce feedPage HTML
+
+# 🟩 What's Next __Tailwind__:
+  - [ ] create landingPage css
+  - [ ] create landingPage res
+  - [ ] create loginPage css
+  - [ ] create loginPage res
+  - [ ] create regPage css
+  - [ ] create regPage res
+  - [ ] create ProfilePage css
+  - [ ] create ProfilePage res
+  - [ ] create feedPage css
+  - [ ] create feedPage res
 
 # ⭕ What's Next __Misc__:
   - [ ] setup email server
