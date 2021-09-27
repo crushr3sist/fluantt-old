@@ -1,18 +1,28 @@
-# What's Next __HTML__:
+# 🟧 What's Next __HTML__:
   - [ ] produce profile page
   - [ ] create decent html
   - [ ] choose tailwind
   - [ ] desgin login page
   - [ ] design register page
   - [ ] design homepage
-  - [ ] produce user table extension
   - [ ] produce global page html
+
+
+
+# 🟨 What's Next __Python__:
   - [ ] produce global page data assortment
   - [ ] produce post creation
   - [ ] produce likes and dislike functionality of posts
-  - 
 
+# 🟦 What's Next __SQL__:
+  - [ ]  produce userExtra table
+  - [ ]  produce Feed Table
+  - [ ]  create UsersPosts table
 
+# ⭕ What's Next __Misc__:
+  - [ ] setup email server
+  - [ ] impliment OAuth with Google and Facebook authentication
+  - [ ] impliment 2FA using tokenisation
 
 # What is this?
 
