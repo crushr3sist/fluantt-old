@@ -14,12 +14,12 @@
 
 # 🟧 What's Next __HTML__:
   - [ ] produce ProfilePage HTML
-  - [🔁] produce landingPage HTML
+  - [x] produce landingPage HTML
   - [ ] produce feedPage HTML
 
 # 🟩 What's Next __Tailwind__:
-  - [🔁] create landingPage css
-  - [🔁] create landingPage res
+  - [x] create landingPage css
+  - [x] create landingPage res
   - [ ] create loginPage css
   - [ ] create loginPage res
   - [ ] create regPage css
