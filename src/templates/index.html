@@ -2,14 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
 </head>
-<body>
-    <h1><a href='/login'>login</a></h1>
-    <h1><a href='/register'>register</a></h1>
-    <h1><a href='/user'>users</a></h1>
-    <h1><a href='/logout'>logout</a></h1>
+<body class="bg-gradient-to-r from-white to-blue-500" >
+    <div class='flex flex-col'>
+        <!--                           -->
+        <div class='flex h-screen justify-center items-center'>
+            <div class='flex justify-center items-center  w-2/4 h-2/4 shadow-2xl bg-white rounded-lg '>
+                <div>
+                    <img src="{{ url_for('static', filename='image/banner.png') }}">
+                </div>
+            </div>
+        </div>
+
+        <!--                          -->
+        <div style='margin-bottom: 200px;' class='flex m-auto flex-col md:flex-col pt-8 w-2/4 shadow-2xl bg-white rounded-lg'>
+
+            <a style='margin: auto; width: 80%;' class='text-center w-64 pt-3 pb-3' href='/login'>
+                <div class=' hover:bg-purple-900 h-10 text-2xl font-semibold text-white mt-4 bg-purple-700 rounded-md  text-center'>
+                    login
+                </div>
+            </a>
+            <a style='margin: auto; width: 80%;' class=' text-center w-64 pt-3 pb-12' href='/register' >
+                <div class='hover:bg-purple-900 h-10 text-2xl font-semibold text-white mt-4 bg-purple-700 rounded-md  text-center'>
+                    register
+                </div>
+            </a>
+
+        </div>
+    </div>
 </body>
 </html>

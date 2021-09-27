@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from flask_login import login_required
 
-bark = Blueprint('main', __name__)
+bark = Blueprint('bark', __name__)
 
 @bark.route('/')
 def index():

@@ -45,6 +45,7 @@ def login():
         return render_template('auth/login.html', form=LoginForm())
 
 @auth.route('/user')
+@login_required
 def userQuery():
     k = [
         current_user.email,
