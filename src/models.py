@@ -1,3 +1,4 @@
+from werkzeug.security import check_password_hash, generate_password_hash
 from .__init__ import db
 
 from flask_login import UserMixin
@@ -23,9 +24,12 @@ class Users(UserMixin,db.Model):
     def __init__(self,email,username,password,name,nickname): 
         self.email = email
         self.username = username
-        self.password = password
+        self.password = generate_password_hash(password)
         self.name = name
         self.nickname = nickname
+        
+    def verify_password(self, pwd):
+        return check_password_hash(self.password, pwd)
     
 
 

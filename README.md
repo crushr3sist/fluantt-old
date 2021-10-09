@@ -1,23 +1,23 @@
 ![Screenshot 2021-09-28 043645](https://user-images.githubusercontent.com/36351054/134966132-12a8d4dd-ab07-4a44-8a15-78a45afec507.png)
 
 # 🟨 What's Next __Python__:
-  - [ ] produce Feed Route
-  - [ ] produce ProfileRoute
-  - [ ] produce postCreation Route
-  - [ ] produce postEdit route
-  - [ ] produce postDelete route
-  - [ ] produce likes and dislike functionality of posts
-  - [ ] produce comment functionality of posts
+  - [] produce postCreation Route
+  - [] produce Feed Route
+  - [] produce ProfileRoute
+  - [] produce postEdit route
+  - [] produce postDelete route
+  - [] produce likes and dislike functionality of posts
+  - [] produce comment functionality of posts
 
 # 🟦 What's Next __SQL__:
-  - [ ]  produce userExtra table
-  - [ ]  produce Feed Table
-  - [ ]  create UsersPosts table
+  - []  produce userExtra table
+  - []  produce Feed Table
+  - []  create UsersPosts table
 
 # 🟧 What's Next __HTML__:
-  - [ ] produce ProfilePage HTML
+  - [] produce ProfilePage HTML
   - [x] produce landingPage HTML
-  - [ ] produce feedPage HTML
+  - [] produce feedPage HTML
 
 # 🟩 What's Next __Tailwind__:
   - [x] create landingPage css
@@ -26,16 +26,16 @@
   - [x] create loginPage res
   - [x] create regPage css
   - [x] create regPage res
-  - [ ] create ProfilePage css
-  - [ ] create ProfilePage res
-  - [ ] create feedPage css
-  - [ ] create feedPage res
+  - [] create ProfilePage css
+  - [] create ProfilePage res
+  - [] create feedPage css
+  - [] create feedPage res
 
 # ⭕ What's Next __Misc__:
-
-  - [ ] setup email server
-  - [ ] impliment OAuth with Google and Facebook authentication
-  - [ ] impliment 2FA using tokenisation
+  - [x] hash the passwords
+  - [] setup email server
+  - [] impliment OAuth with Google and Facebook authentication
+  - [] impliment 2FA using tokenisation
 
 # What is this?
 

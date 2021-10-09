@@ -5,6 +5,7 @@ from flask_login.login_manager import LoginManager
 from src.views.auth import auth
 from src.views.bark import bark
 
+
 def create_app():
     appVar = Flask(__name__)
     appVar.secret_key = '>%P5z#vcQ7' 
