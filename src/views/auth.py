@@ -17,7 +17,7 @@ GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
 
-client = WebApplicationClient(GOOGLE_CLIENT_ID)
+oAuthClient = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 auth = Blueprint('authentication', __name__)
 from src.models import *
@@ -44,7 +44,7 @@ def index():
 def register():
     if request.method == 'POST':
         request.form.get('email')
-        userReg = Users(
+        userReg = _localuser(
             request.form['email'],
             request.form['username'],
             request.form['password'], 
@@ -60,7 +60,7 @@ def callback():
     code = request.args.get('code')
     google_provider_cfg = get_google_provider_cfg()
     token_endpoint = google_provider_cfg['token_endpoint']
-    token_url, headers, body = client.prepare_token_request(
+    token_url, headers, body = oAuthClient.prepare_token_request(
         token_endpoint,
         authorization_response=request.url,
         code = code
@@ -71,38 +71,41 @@ def callback():
         data = body, 
         auth = (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
     )
-    client.parse_request_body_response(json.dumps(token_response.json()))
+    oAuthClient.parse_request_body_response(json.dumps(token_response.json()))
     userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
-    uri, headers, body = client.add_token(userinfo_endpoint)
+    uri, headers, body = oAuthClient.add_token(userinfo_endpoint)
     userinfo_response = requests.get(uri, headers=headers, data=body)
+    return userinfo_response
+    # if userinfo_response.json().get("email_verified"):
+    #     unique_id = userinfo_response.json()["sub"]
+    #     users_email = userinfo_response.json()["email"]
+    #     picture = userinfo_response.json()["picture"]
+    #     users_name = userinfo_response.json()["given_name"]
 
-    if userinfo_response.json().get("email_verified"):
-        unique_id = userinfo_response.json()["sub"]
-        users_email = userinfo_response.json()["email"]
-        picture = userinfo_response.json()["picture"]
-        users_name = userinfo_response.json()["given_name"]
+    #     return [unique_id, users_email, picture, users_name]
 
-        return [unique_id, users_email, picture, users_name]
-
-    else:
-        return "User email was not available or not verified by Google.", 400
+    # else:
+    #     return "User email was not available or not verified by Google.", 400
     
 
 
 @auth.route('/login', methods=['POST','GET'])
 def login():
     google_provider_cfg = get_google_provider_cfg()
-    authorization_endpoint = google_provider_cfg['authorization_endpoint']
-    request_uri = client.prepare_request_uri(
+    authorization_endpoint = google_provider_cfg["authorization_endpoint"]
+
+    # Use library to construct the request for Google login and provide
+    # scopes that let you retrieve user's profile from Google
+    request_uri = oAuthClient.prepare_request_uri(
         authorization_endpoint,
-        redirect_uri= request.base_url + '/callback',
-        scope=['openid','email','profile'],
+        redirect_uri=request.base_url + "/callback",
+        scope=["openid", "email", "profile"],
     )
     return redirect(request_uri)
     # if request.method == 'POST':
     #     form = LoginForm()
     #     if form.validate_on_submit():
-    #         user = Users.query.filter_by(username=form.username.data).first()
+    #         user = _localuser.query.filter_by(username=form.username.data).first()
     #         if user and user.verify_password(form.password.data):  
     #             user.is_active = True
     #             login_user(user)
@@ -128,7 +131,7 @@ def userQuery():
 @auth.route('/logout', methods=['POST','GET'])
 @login_required
 def logout():
-    if Users.is_authenticated:
+    if _localuser.is_authenticated:
         logout_user()
         return redirect('/login')
     return render_template('login.html')
@@ -140,5 +143,4 @@ def userHome(user):
     return user
 
 '''
-
 '''

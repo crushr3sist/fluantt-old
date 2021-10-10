@@ -12,14 +12,13 @@ def create_app():
     appVar.register_blueprint(auth)
     appVar.register_blueprint(bark)
     
-    appVar.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/bark.sqlite3'
+    appVar.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/fluantt.sqlite3'
     appVar.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     return appVar
 
 app = create_app()
-db = SQLAlchemy(app)
-db.create_all()
 
+db = SQLAlchemy(app)
 
 
 
