@@ -12,7 +12,9 @@ GOOGLE_CLIENT_SECRET = "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"
 auth = Blueprint('authentication', __name__)
 
 from src.__init__ import oauth
-from src.models import *
+from src.__init__ import db 
+
+from src.models import _googleAuthUser, _localuser
 
 google = oauth.register(
     name='google',
@@ -53,22 +55,31 @@ def authorize():
     token = google.authorize_access_token() 
     resp = google.get('userinfo')  
     user_info = resp.json()
-    user = oauth.google.userinfo()  
+    user = oauth.google.userinfo()
+    if user:
+        exists = _googleAuthUser.query.filter_by(email = user.email).first()
+        userObj = _googleAuthUser(uid = user.sub , name = user.name, email = user.email, profile_pic = user.picture)
+        if not exists:
+            db.session.add(userObj)
+            db.session.commit()
 
-    return user
+            newUserObj = _googleAuthUser.query.filter_by(email = user.email).first()
+            newUserObj.is_active = True
+            login_user(newUserObj)
+            return redirect('user')
+
+        else:
+            exists.is_active = True
+            login_user(exists)
+            return redirect('user')
+    
+    else:
+        return redirect('/googlelogin')    
 @auth.route('/googlelogin')
 def gglRedirect():
     google = oauth.create_client('google')  # create the google oauth client
     redirect_uri = url_for('authentication.authorize', _external=True)
     return google.authorize_redirect(redirect_uri)
-
-'''
-@auth.route('/RegServe')
-def RegServe():
-    
-
-'''
-
 
 @auth.route('/internallogin', methods=['POST','GET'])
 def Intlogin():
@@ -89,11 +100,10 @@ def Intlogin():
 @login_required
 def userQuery():
     k = [
+        current_user.uid,
+        current_user.name,
         current_user.email,
-    current_user.username,
-    current_user.password,
-    current_user.name,
-    current_user.nickname
+        current_user.profile_pic,            
     ] 
 
     return render_template('personal/profilePage.html', objec = k)

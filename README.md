@@ -1,8 +1,14 @@
 ![Screenshot 2021-09-28 043645](https://user-images.githubusercontent.com/36351054/134966132-12a8d4dd-ab07-4a44-8a15-78a45afec507.png)
 
 # 🟨 What's Next __Python__:
+
+
+  - [ ] register and login the user in the login form
   - [ ] create login opt serve
       - [ ] ** should show the fields in the reg-index with options to other tokens **
+      - [ ] html form
+        - [] request.form['internal submit'] 
+        - [] request.form['google submit']
     - [ ] google reg route
     - [ ] internal login route
       - [ ] make sure the redirects are pointing to the correct index
@@ -10,8 +16,12 @@
 
   - [ ] create register opt serve
       - [ ] ** should show the fields in the reg-index with options to other tokens **
+      - [ ] html form
+        - [] request.form['internal submit'] 
+        - [] request.form['google submit']
     - [ ] google reg route
     - [ ] internal reg route
+
   - [ ] produce postCreation Route
   - [ ] produce Feed Route
   - [ ] produce ProfileRoute

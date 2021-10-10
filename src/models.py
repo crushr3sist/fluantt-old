@@ -6,7 +6,7 @@ from flask_login import UserMixin
 
 
 class _localuser(UserMixin,db.Model):
-    __tablename__ = 'Users'
+    __tablename__ = '_localuser'
     id = db.Column(db.Integer(), primary_key=True)
     email = db.Column(db.String(), nullable=False)
     username = db.Column(db.String(), nullable=False)
@@ -20,6 +20,7 @@ class _localuser(UserMixin,db.Model):
 
     def get_id(self):
         return self.id
+        
     def is_authenticated(self):
         return self.authenticated
 
@@ -35,26 +36,31 @@ class _localuser(UserMixin,db.Model):
 
 
 class _googleAuthUser(UserMixin, db.Model):
-
-    id_ = db.Column(db.Integer(), primary_key = True)
+    __tablename__ = '_googleAuthUser'
+    id = db.Column(db.Integer(), primary_key = True)
+    uid = db.Column(db.String(), nullable=False)
     name = db.Column(db.String(), nullable=False)
     email = db.Column(db.String(), nullable=False)
     profile_pic = db.Column(db.String(), nullable=False)
-
-    def __init__(self, id_, name, email, profile_pic):
-        self.id = id_
+    
+    is_authenticated = False
+    is_active = False
+    is_anonymous = False
+    
+    def __init__(self, uid, name, email, profile_pic):
+        self.uid = generate_password_hash(uid)
         self.name = name
-        self.email = generate_password_hash(email)
+        self.email = email
         self.profile_pic = profile_pic
 
-    def get_id(self):
-        return self.id
+    def get_uid(self):
+        return self.uid
 
     def is_authenticated(self):
         return self.authenticated
     
-    def verify_user(self, email):
-        return check_password_hash(self.email, email)
+    def verify_user(self, uid):
+        return check_password_hash(self.uid, uid)
 
 class BarkMain(db.Model):
     __tablename__ = 'BarkMain'

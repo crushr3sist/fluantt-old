@@ -12,5 +12,5 @@ def load_user(user_id):
     return _localuser.query.get(int(user_id))
 
 @login_manager.user_loader
-def load_user(user_id):
+def loadgoogleuser(user_id):
     return _googleAuthUser.query.get(int(user_id))
