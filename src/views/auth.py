@@ -6,15 +6,9 @@ from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user, login_user, logout_user
 from werkzeug.utils import redirect
 
-
 GOOGLE_CLIENT_ID = "1051638467361-9u2jc677sacg293dg1hso07bnkt0eagt.apps.googleusercontent.com"
-GOOGLE_DISCOVERY_URL = (
-    "https://accounts.google.com/.well-known/openid-configuration"
-)
+GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration"
 GOOGLE_CLIENT_SECRET = "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"
-
-
-
 auth = Blueprint('authentication', __name__)
 
 from src.__init__ import oauth
@@ -37,8 +31,8 @@ google = oauth.register(
 def index():
     return render_template('index.html')
 
-@auth.route('/register', methods=['POST','GET'])
-def register():
+@auth.route('/IntRegister', methods=['POST','GET'])
+def IntRegister():
     if request.method == 'POST':
         request.form.get('email')
         userReg = _localuser(
@@ -62,25 +56,34 @@ def authorize():
     user = oauth.google.userinfo()  
 
     return user
-
-@auth.route('/login', methods=['POST','GET'])
-def login():
+@auth.route('/googlelogin')
+def gglRedirect():
     google = oauth.create_client('google')  # create the google oauth client
     redirect_uri = url_for('authentication.authorize', _external=True)
     return google.authorize_redirect(redirect_uri)
 
-    # if request.method == 'POST':
-    #     form = LoginForm()
-    #     if form.validate_on_submit():
-    #         user = _localuser.query.filter_by(username=form.username.data).first()
-    #         if user and user.verify_password(form.password.data):  
-    #             user.is_active = True
-    #             login_user(user)
-    #             return redirect(f'/{user.username}/home')
-    #         else:
-    #             return f'{user.verify_password(form.password.data)}'
-    # else:
-    #     return redirect('/login')
+'''
+@auth.route('/RegServe')
+def RegServe():
+    
+
+'''
+
+
+@auth.route('/internallogin', methods=['POST','GET'])
+def Intlogin():
+    if request.method == 'POST':
+        form = LoginForm()
+        if form.validate_on_submit():
+            user = _localuser.query.filter_by(username=form.username.data).first()
+            if user and user.verify_password(form.password.data):  
+                user.is_active = True
+                login_user(user)
+                return redirect(f'/{user.username}/home')
+            else:
+                return f'{user.verify_password(form.password.data)}'
+    else:
+        return redirect('/login')
 
 @auth.route('/user')
 @login_required
@@ -110,4 +113,6 @@ def userHome(user):
     return user
 
 '''
+
+    
 '''

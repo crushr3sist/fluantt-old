@@ -1,23 +1,35 @@
 ![Screenshot 2021-09-28 043645](https://user-images.githubusercontent.com/36351054/134966132-12a8d4dd-ab07-4a44-8a15-78a45afec507.png)
 
 # 🟨 What's Next __Python__:
-  - [] produce postCreation Route
-  - [] produce Feed Route
-  - [] produce ProfileRoute
-  - [] produce postEdit route
-  - [] produce postDelete route
-  - [] produce likes and dislike functionality of posts
-  - [] produce comment functionality of posts
+  - [ ] create login opt serve
+      - [ ] ** should show the fields in the reg-index with options to other tokens **
+    - [ ] google reg route
+    - [ ] internal login route
+      - [ ] make sure the redirects are pointing to the correct index
+      - [ ] make sure the html being served is doing correct hrefs
+
+  - [ ] create register opt serve
+      - [ ] ** should show the fields in the reg-index with options to other tokens **
+    - [ ] google reg route
+    - [ ] internal reg route
+  - [ ] produce postCreation Route
+  - [ ] produce Feed Route
+  - [ ] produce ProfileRoute
+  - [ ] produce postEdit route
+  - [ ] produce postDelete route
+  - [ ] produce likes and dislike functionality of posts
+  - [ ] produce comment functionality of posts
 
 # 🟦 What's Next __SQL__:
-  - []  produce userExtra table
-  - []  produce Feed Table
-  - []  create UsersPosts table
+  - [ ]  produce userExtra table
+  - [ ]  produce Feed Table
+  - [ ]  create UsersPosts table
 
 # 🟧 What's Next __HTML__:
-  - [] produce ProfilePage HTML
+
+  - [ ] produce ProfilePage HTML
   - [x] produce landingPage HTML
-  - [] produce feedPage HTML
+  - [ ] produce feedPage HTML
 
 # 🟩 What's Next __Tailwind__:
   - [x] create landingPage css
@@ -26,16 +38,16 @@
   - [x] create loginPage res
   - [x] create regPage css
   - [x] create regPage res
-  - [] create ProfilePage css
-  - [] create ProfilePage res
-  - [] create feedPage css
-  - [] create feedPage res
+  - [ ] create ProfilePage css
+  - [ ] create ProfilePage res
+  - [ ] create feedPage css
+  - [ ] create feedPage res
 
 # ⭕ What's Next __Misc__:
   - [x] hash the passwords
-  - [] setup email server
-  - [] impliment OAuth with Google and Facebook authentication
-  - [] impliment 2FA using tokenisation
+  - [ ] setup email server
+  - [x] impliment OAuth with Google and Facebook authentication
+  - [ ] impliment 2FA using tokenisation
 
 # What is this?
 
