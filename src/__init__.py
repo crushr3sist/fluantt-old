@@ -4,6 +4,8 @@ from flask import Flask
 from flask_login.login_manager import LoginManager
 from src.views.auth import auth
 from src.views.bark import bark
+from authlib.integrations.flask_client import OAuth
+
 
 
 def create_app():
@@ -17,7 +19,7 @@ def create_app():
     return appVar
 
 app = create_app()
-
+oauth = OAuth(app)
 db = SQLAlchemy(app)
 
 
