@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename='css/googlebtn.css')}}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>login</title>
     </head>
@@ -55,6 +56,18 @@
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                     Register
                     </button>
+                    <a href="/googlelogin">
+                        <div class='g-sign-in-button'>
+                            <div class=content-wrapper>
+                                <div class='logo-wrapper'>
+                                    <img src='https://developers.google.com/identity/images/g-logo.png'>
+                                </div>
+                                <span class='text-container'>
+                                    <span>Sign in with Google</span>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </form>
             <p class="text-center text-gray-500 text-xs">

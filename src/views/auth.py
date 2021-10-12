@@ -27,16 +27,17 @@ google = oauth.register(
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     client_kwargs={'scope': 'openid email profile'},
+    prompt='consent'
+
 )
 
 @auth.route("/")
 def index():
     return render_template('index.html')
 
-@auth.route('/IntRegister', methods=['POST','GET'])
+@auth.route('/register', methods=['POST','GET'])
 def IntRegister():
     if request.method == 'POST':
-        request.form.get('email')
         userReg = _localuser(
             request.form['email'],
             request.form['username'],
@@ -50,7 +51,6 @@ def IntRegister():
 
 @auth.route('/authorize')
 def authorize():
-
     google = oauth.create_client('google') 
     token = google.authorize_access_token() 
     resp = google.get('userinfo')  
@@ -62,39 +62,38 @@ def authorize():
         if not exists:
             db.session.add(userObj)
             db.session.commit()
-
             newUserObj = _googleAuthUser.query.filter_by(email = user.email).first()
             newUserObj.is_active = True
             login_user(newUserObj)
             return redirect('user')
-
         else:
             exists.is_active = True
             login_user(exists)
             return redirect('user')
-    
     else:
         return redirect('/googlelogin')    
+        
 @auth.route('/googlelogin')
 def gglRedirect():
     google = oauth.create_client('google')  # create the google oauth client
     redirect_uri = url_for('authentication.authorize', _external=True)
     return google.authorize_redirect(redirect_uri)
 
-@auth.route('/internallogin', methods=['POST','GET'])
-def Intlogin():
+@auth.route('/login', methods=['POST','GET'])
+def login():
     if request.method == 'POST':
         form = LoginForm()
         if form.validate_on_submit():
             user = _localuser.query.filter_by(username=form.username.data).first()
             if user and user.verify_password(form.password.data):  
                 user.is_active = True
+                user.is_authenticated = True
                 login_user(user)
-                return redirect(f'/{user.username}/home')
+                return redirect(f'/user')
             else:
                 return f'{user.verify_password(form.password.data)}'
     else:
-        return redirect('/login')
+        return render_template('auth/login.html', form=LoginForm())
 
 @auth.route('/user')
 @login_required
@@ -111,16 +110,13 @@ def userQuery():
 @auth.route('/logout', methods=['POST','GET'])
 @login_required
 def logout():
-    if _localuser.is_authenticated:
+    if _localuser.is_authenticated :
+        logout_user()
+        return redirect('/login')
+    if _googleAuthUser.is_authenticated:
         logout_user()
         return redirect('/login')
     return render_template('login.html')
-
-
-@auth.route('/<user>/home')
-@login_required
-def userHome(user):
-    return user
 
 '''
 

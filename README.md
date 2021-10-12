@@ -3,13 +3,13 @@
 # 🟨 What's Next __Python__:
   
   # - https://console.cloud.google.com/apis/credentials?project=barkrr
-
+  - [ ] figure out why google user wont log out
   - [ ] register and login the user in the login form
   - [ ] create login opt serve
       - [ ] ** should show the fields in the reg-index with options to other tokens **
       - [ ] html form
-        - [] request.form['internal submit'] 
-        - [] request.form['google submit']
+        - [ ] request.form['internal submit'] 
+        - [ ] request.form['google submit']
     - [ ] google reg route
     - [ ] internal login route
       - [ ] make sure the redirects are pointing to the correct index
@@ -18,10 +18,11 @@
   - [ ] create register opt serve
       - [ ] ** should show the fields in the reg-index with options to other tokens **
       - [ ] html form
-        - [] request.form['internal submit'] 
-        - [] request.form['google submit']
+        - [ ] request.form['internal submit'] 
+        - [ ] request.form['google submit']
     - [ ] google reg route
     - [ ] internal reg route
+
 
   - [ ] produce postCreation Route
   - [ ] produce Feed Route
@@ -56,6 +57,7 @@
   - [ ] create feedPage res
 
 # ⭕ What's Next __Misc__:
+  - [ ] *fix the goddamn branding* 
   - [x] hash the passwords
   - [ ] setup email server
   - [x] impliment OAuth with Google and Facebook authentication
