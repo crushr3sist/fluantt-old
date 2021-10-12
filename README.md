@@ -1,7 +1,8 @@
 ![Screenshot 2021-09-28 043645](https://user-images.githubusercontent.com/36351054/134966132-12a8d4dd-ab07-4a44-8a15-78a45afec507.png)
 
 # 🟨 What's Next __Python__:
-
+  
+  # - https://console.cloud.google.com/apis/credentials?project=barkrr
 
   - [ ] register and login the user in the login form
   - [ ] create login opt serve
@@ -31,6 +32,7 @@
   - [ ] produce comment functionality of posts
 
 # 🟦 What's Next __SQL__:
+  - [ ]  migrate to postgres 
   - [ ]  produce userExtra table
   - [ ]  produce Feed Table
   - [ ]  create UsersPosts table
