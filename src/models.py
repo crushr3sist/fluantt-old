@@ -1,17 +1,19 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
+from authlib.integrations.sqla_oauth2 import OAuth2TokenMixin
+
 from .__init__ import db
 
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 
 
-class _localuser(UserMixin,db.Model):
+class _localuser(AnonymousUserMixin, UserMixin,db.Model):
     __tablename__ = '_localuser'
-    id = db.Column(db.Integer(), primary_key=True)
-    email = db.Column(db.String(), nullable=False)
+    id       = db.Column(db.Integer(), primary_key=True)
+    email    = db.Column(db.String(), nullable=False)
     username = db.Column(db.String(), nullable=False)
     password = db.Column(db.String(), nullable=False)
-    name = db.Column(db.String(), nullable=False)
+    name     = db.Column(db.String(), nullable=False)
     nickname = db.Column(db.String(), nullable=False)
 
     is_authenticated = False
@@ -52,8 +54,8 @@ class _googleAuthUser(UserMixin, db.Model):
         self.name = name
         self.email = email
         self.profile_pic = profile_pic
-
-    def get_uid(self):
+    
+    def get_id(self):
         return self.uid
 
     def is_authenticated(self):

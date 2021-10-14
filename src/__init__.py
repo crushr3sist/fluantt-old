@@ -1,10 +1,13 @@
 
+from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask_login.login_manager import LoginManager
 from src.views.auth import auth
 from src.views.bark import bark
 from authlib.integrations.flask_client import OAuth
+
+
 
 
 
@@ -16,6 +19,8 @@ def create_app():
     
     appVar.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/fluantt.sqlite3'
     appVar.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    appVar.config['SESSION_COOKIE_NAME'] = 'google-login-session'
+    appVar.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
     return appVar
 
 app = create_app()

@@ -2,9 +2,10 @@ import json, os, requests
 from flask.helpers import url_for
 from werkzeug.security import check_password_hash
 from src.forms import LoginForm, Register
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session
 from flask_login import login_required, current_user, login_user, logout_user
 from werkzeug.utils import redirect
+from authlib.integrations.requests_client import OAuth2Session
 
 GOOGLE_CLIENT_ID = "1051638467361-9u2jc677sacg293dg1hso07bnkt0eagt.apps.googleusercontent.com"
 GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration"
@@ -30,6 +31,9 @@ google = oauth.register(
     prompt='consent'
 
 )
+client = OAuth2Session(GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET,)
+
+
 
 @auth.route("/")
 def index():
@@ -53,9 +57,13 @@ def IntRegister():
 def authorize():
     google = oauth.create_client('google') 
     token = google.authorize_access_token() 
+    session['token'] = token
+    session['google'] = google
     resp = google.get('userinfo')  
     user_info = resp.json()
     user = oauth.google.userinfo()
+    session['profile'] = user_info
+    session.perminant = True
     if user:
         exists = _googleAuthUser.query.filter_by(email = user.email).first()
         userObj = _googleAuthUser(uid = user.sub , name = user.name, email = user.email, profile_pic = user.picture)
@@ -65,11 +73,11 @@ def authorize():
             newUserObj = _googleAuthUser.query.filter_by(email = user.email).first()
             newUserObj.is_active = True
             login_user(newUserObj)
-            return redirect('user')
+            return redirect('/user/google')
         else:
             exists.is_active = True
             login_user(exists)
-            return redirect('user')
+            return redirect('/user/google')
     else:
         return redirect('/googlelogin')    
         
@@ -84,41 +92,56 @@ def login():
     if request.method == 'POST':
         form = LoginForm()
         if form.validate_on_submit():
-            user = _localuser.query.filter_by(username=form.username.data).first()
-            if user and user.verify_password(form.password.data):  
-                user.is_active = True
-                user.is_authenticated = True
-                login_user(user)
-                return redirect(f'/user')
+            CurrentUser = _localuser.query.filter_by(username=form.username.data).first()
+            print(CurrentUser)
+            if CurrentUser and CurrentUser.verify_password(form.password.data):  
+                CurrentUser.is_active = True
+                login_user(CurrentUser)
+                print(login_user(CurrentUser))
+                return redirect(f'/user/local')
             else:
-                return f'{user.verify_password(form.password.data)}'
+                return f'{CurrentUser.verify_password(form.password.data)}'
     else:
         return render_template('auth/login.html', form=LoginForm())
 
-@auth.route('/user')
-@login_required
-def userQuery():
-    k = [
-        current_user.uid,
-        current_user.name,
-        current_user.email,
-        current_user.profile_pic,            
-    ] 
-
+@auth.route('/user/local')
+def userLocal():
+    k = [current_user.email,current_user.username,current_user.password,current_user.name,current_user.nickname]
     return render_template('personal/profilePage.html', objec = k)
 
-@auth.route('/logout', methods=['POST','GET'])
-@login_required
+@auth.route('/user/google')
+def userGoogle():
+    k = [current_user.uid,current_user.name,current_user.email,current_user.profile_pic]
+    return render_template('personal/profilePage.html', objec = k)
+
+@auth.route('/session')
+def route():
+    return session
+
+@auth.route('/googlelogout')
+def googlelogout():
+    for key in list(session.keys()):
+        session.pop(key)
+    currentToken = session['token'] 
+    currentClient = session['google']
+    token_endpoint = 'https://127.0.0.1:8080/authorize'
+    
+    currentClient.revoke_token(token_endpoint, token=currentToken)
+    currentClient.introspect_token(token_endpoint, token=currentToken)
+
+    return redirect('/session')
+
+
+@auth.route('/logout')
 def logout():
-    if _localuser.is_authenticated :
-        logout_user()
-        return redirect('/login')
-    if _googleAuthUser.is_authenticated:
-        logout_user()
-        return redirect('/login')
-    return render_template('login.html')
+    logout_user()
+    return redirect('/googlelogout')
 
 '''
+      
+   
 
-    
+
+
+k = [current_user.id,current_user.email,current_user.username,current_user.password,current_user.name,current_user.nickname]
 '''
